@@ -1,0 +1,33 @@
+#include <Servo.h>
+
+Servo servo;
+
+const int joystickX = A0;
+const int servoPin = 9;
+
+// Servo angle limits
+const int initialAngle = 60;  
+const int finalAngle = 0;    
+
+void setup() {
+  pinMode(joystickX, INPUT);
+  servo.attach(servoPin);
+  servo.write(finalAngle);  
+  delay(1000); 
+  
+}
+
+void loop() {
+  int xValue = analogRead(joystickX);  
+  Serial.println(xValue);  
+
+  
+  if (xValue > 0 || xValue > 500) {
+    servo.write(initialAngle);  
+    delay(200);               
+    servo.write(finalAngle);   
+    delay(300);               
+  }
+
+  
+}
